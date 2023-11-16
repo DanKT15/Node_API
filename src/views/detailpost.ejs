@@ -1,0 +1,35 @@
+<h1><%= data.title %></h1>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Tiêu đề</th>
+        <th scope="col">Nội dung</th>
+        <th scope="col">Ngày tạo</th>
+        <th scope="col">image</th>
+        <th scope="col">news_id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.list.forEach(element => { %>
+        <% let danhmuc = element.news_id %>
+      <tr>
+        <th scope="row"><%= element.id %></th>
+        <td><%= element.title %></td>
+        <td><%= element.content %></td>
+        <td><%= element.create_at %></td>
+        <td><%= element.image %></td>
+        <td>
+          <% data.danhmuc.forEach(e => { %>
+            <% if (e.id === danhmuc) { %>
+              <%= e.title %>
+            <% } %>
+          <% }) %>
+        </td>
+   
+      </tr>
+
+      <% }) %>
+    </tbody>
+  </table>

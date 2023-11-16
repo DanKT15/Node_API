@@ -1,0 +1,30 @@
+<h1><%= data.title %></h1>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Tài khoản</th>
+        <th scope="col">Mật Khẩu</th>
+        <th scope="col">Họ Và Tên</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col">Giới tính</th>
+        <th scope="col">Email</th>
+        <th scope="col">Quyền</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.list.forEach(element => { %>
+
+      <tr>
+        <th scope="row"><%= element.username %></th>
+        <td><%= element.password %></td>
+        <td><%= element.fullname %></td>
+        <td><%= element.address %></td>
+        <td><%= element.sex %></td>
+        <td><%= element.email %></td>
+        <td><% let quyen = (element.groupid === 1) ? 'User' : 'Admin'%> <%= quyen %></td>
+      </tr>
+
+      <% }) %>
+    </tbody>
+  </table>

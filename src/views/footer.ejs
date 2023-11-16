@@ -1,0 +1,28 @@
+<script src="/static//js/main.js"></script>
+    <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+    <script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/vendor/select2/select2.min.js"></script>
+    <script type="text/javascript">
+        //show - hide mật khẩu
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text"
+            } else {
+                x.type = "password";
+            }
+        }
+        $(".click-eye").click(function () {
+            $(this).toggleClass("bx-show bx-hide");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+    </script>
+</body>
+</html>

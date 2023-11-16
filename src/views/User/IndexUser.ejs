@@ -1,0 +1,70 @@
+<style>
+     .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Độ rộng tối đa của phần tử chứa đoạn văn bản */
+  }
+</style>
+
+<!--__--__--__--__--  T H E    S L I D E R --__--__--__--___--__--__--__-->
+<div class="slider-wrapper theme-default">
+    <div id="slider" class="nivoSlider">
+        <img src="/static/User/images/slide1.jpg" alt="" />
+        <a href="http://geeksband.com"><img src="/static/User/images/slide2.jpg" alt="" title="This is an example of a caption with a link" /></a>
+        <img src="/static/User/images/slide3.jpg" alt="" title="This is an example of a caption" />
+        <img src="/static/User/images/slide4.jpg" alt="" />
+    </div>
+</div>
+<script type="text/javascript">
+$(window).load(function() {
+    $('#slider').nivoSlider({pauseTime: 6000,});
+});
+</script>
+
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+    
+
+    <div id="line">
+        <div class="dline"></div>
+        <h1>HOT NEWS</h1>
+        <div class="dline"></div>
+    </div>
+    <div id="ourserv">
+
+        <% let id = 1 %>
+<% data.list.forEach(element => { %>
+    <article>
+        <p class="truncate" style="color: white;width: 216px;"><%= element.title %></p>
+        <img height="100px" width="208px" src="/static/upload/<%=  element.image %>" alt="" />
+        <p class="truncate" style="color: white;width: 216px;"><%=  element.content %></p>
+        <a href="/SinglePage/<%= element.id %>" class="rm">Read More</a>
+    </article>
+
+<% id += 1 %>
+<% }) %>
+     
+      
+    </div>
+    <div id="sline">
+        <div class="sdline"></div>
+        <h1>NEWS</h1>
+        <div class="sdline"></div>
+    </div>
+    <div id="latestp">
+
+        <% data.lists.forEach(element => { %>
+            <article>
+                <p class="truncate" style="color: white;width: 216px;"><%= element.title %></p>
+                <img height="100px" width="208px" src="/static/upload/<%=  element.image %>" alt="" />
+                <p class="truncate" style="color: white;width: 216px;"><%=  element.content %></p>
+                <a href="/SinglePage/<%= element.id %>" class="rm">Read More</a>
+            </article>
+        <% id += 1 %>
+        <% }) %>
+     
+     
+    </div>
+</section>				
+<!--__--__--__--__--  T H E    F O O T E R --__--__--__--___--__--__--__-->

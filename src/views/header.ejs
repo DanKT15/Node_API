@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <title>Node</title>
+
+    <script type="text/javascript">
+        //Phân Trang Cho Table
+        function Pager(tableName, itemsPerPage) {
+            this.tableName = tableName;
+            this.itemsPerPage = itemsPerPage;
+            this.currentPage = 1;
+            this.pages = 0;
+            this.inited = false;
+
+            this.showRecords = function (from, to) {
+                var rows = document.getElementById(tableName).rows;
+                for (var i = 1; i < rows.length; i++) {
+                    if (i < from || i > to)
+                        rows[i].style.display = 'none';
+                    else
+                        rows[i].style.display = '';
+                }
+            }
+
+            this.showPage = function (pageNumber) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var oldPageAnchor = document.getElementById('pg' + this.currentPage);
+                oldPageAnchor.className = 'pg-normal';
+
+                this.currentPage = pageNumber;
+                var newPageAnchor = document.getElementById('pg' + this.currentPage);
+                newPageAnchor.className = 'pg-selected';
+
+                var from = (pageNumber - 1) * itemsPerPage + 1;
+                var to = from + itemsPerPage - 1;
+                this.showRecords(from, to);
+            }
+
+            this.prev = function () {
+                if (this.currentPage > 1)
+                    this.showPage(this.currentPage - 1);
+            }
+
+            this.next = function () {
+                if (this.currentPage < this.pages) {
+                    this.showPage(this.currentPage + 1);
+                }
+            }
+
+            this.init = function () {
+                var rows = document.getElementById(tableName).rows;
+                var records = (rows.length - 1);
+                this.pages = Math.ceil(records / itemsPerPage);
+                this.inited = true;
+            }
+            this.showPageNav = function (pagerName, positionId) {
+                if (!this.inited) {
+                    alert("not inited");
+                    return;
+                }
+                var element = document.getElementById(positionId);
+
+                var pagerHtml = '<span onclick="' + pagerName +
+                    '.prev();" class="pg-normal">&#171</span> | ';
+                for (var page = 1; page <= this.pages; page++)
+                    pagerHtml += '<span id="pg' + page + '" class="pg-normal" onclick="' + pagerName +
+                        '.showPage(' + page + ');">' + page + '</span> | ';
+                pagerHtml += '<span onclick="' + pagerName + '.next();" class="pg-normal">&#187;</span>';
+
+                element.innerHTML = pagerHtml;
+            }
+        }
+    </script>
+</head>
+<!-- onload="time()" -->
+<body> 
+    
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                    <% if (data.auth) { %>
+                        <a class="navbar-brand" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i><%= 'Xin Chào ' + data.auth.name %></a>
+                    <% } %>
+                    
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- <li class="active"><a href="#home" data-toggle="tooltip" data-placement="bottom"title="NHÂN VIÊN">NHÂN VIÊN</a></li> -->
+                    <li><a href="/about" data-toggle="tooltip" data-placement="bottom" title="TIỀN LƯƠNG">About</a></li>
+                    <li><a href="/list-user/0-10" data-toggle="tooltip" data-placement="bottom" title="ĐIỂM DANH">Danh Sách User</a></li>
+                    <li><a href="/create_new_user" data-toggle="tooltip" data-placement="bottom" title="LỊCH CÔNG TÁC">Thêm User</a></li>
+
+                    <!-- 06/10/2023 -->
+                    <li><a href="/list-news/0-10" data-toggle="tooltip" data-placement="bottom" title="ĐIỂM DANH">Danh Sách Danh Mục</a></li>
+                    <li><a href="/create_new_news" data-toggle="tooltip" data-placement="bottom" title="LỊCH CÔNG TÁC">Thêm Danh Mục</a></li>
+                   <!-- 06/10/2023 -->
+
+                   <!-- 06/10/2023 -->
+                   <li><a href="/list-post/0-10" data-toggle="tooltip" data-placement="bottom" title="ĐIỂM DANH">Danh Sách Bài Viết</a></li>
+                   <li><a href="/create_new_post" data-toggle="tooltip" data-placement="bottom" title="LỊCH CÔNG TÁC">Thêm Bài Viết</a></li>
+                  <!-- 06/10/2023 -->
+
+
+                    <!-- <li><a href="#contact" data-toggle="tooltip" data-placement="bottom" title="BÁO CÁO">BÁO CÁO</a></li>
+                    <li><a href="#tour" data-toggle="tooltip" data-placement="bottom" title="SỰ KIỆN">SỰ KIỆN</a></li> -->
+                    <li>
+                        
+                         <% if (!data.auth) { %>
+                            <a href="/login" data-toggle="tooltip" data-placement="bottom" title="TÀI KHOẢN"><b>Tài Khoản</b>
+                                <span class="caret"></span>
+                            </a>
+                         <% } else {%>
+                                <ul class="dropdown">
+                                    <li><a href="/logout" data-toggle="tooltip" data-placement="bottom"
+                                            title="ĐĂNG XUẤT"><b>Đăng xuất <i class="fas fa-sign-out-alt"></i></b></a></li>
+                                </ul>
+                            <% } %>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+

@@ -1,0 +1,44 @@
+<!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+<section>
+			
+    <!--__--__--__-- A R T I C L E S --__--__--__--__-->
+    <div id="articles">
+
+        <% let id = 1 %>
+        <% data.items.forEach(element => { %>
+            <article>
+                
+               <a href="/SinglePage/<%= element.id %>"> <h2 style="color: white;"><%= element.title %></h2></a>
+                <img height="190px" width="580px" src="/static/upload/<%= element.image %>"  alt="" />
+               
+            </article>
+            <br>
+
+        <% id += 1 %>
+        <% }) %>
+
+        
+       
+    </div>
+    <!--__--__--__--  S I D E B A R --__--__--__--__-->
+    <div id="sidebar">
+        <aside>
+            <div id="cat">
+                <h1 style="color: white;">Categories</h1>
+                <ul>
+                    <% let idd = 1 %>
+                    <% data.itemss.forEach(element => { %>
+                        <li><a href="/ByNews/<%= element.id %>"><%= element.title %></a></li>
+    
+                    <% idd += 1 %>
+                    <% }) %>
+                   
+                 
+                </ul>
+            </div>
+           
+        </aside>
+       
+    </div>
+</section>
+<!--__--__--__--__--  T H E    F O O T E R --__--__--__--___--__--__--__-->

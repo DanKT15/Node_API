@@ -1,0 +1,34 @@
+
+<h1><%= data.title %></h1>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tài khoản</th>
+            <th scope="col">Email</th>
+            <th scope="col">Quyền</th>
+            <th scope="col">Setting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let id = 1 %>
+          <% data.list.forEach(element => { %>
+          <tr>
+            <th scope="row"><%= id %></th>
+            <td><%= element.username %></td>
+            <td><%= element.email %></td>
+            <td><% let quyen = (element.groupid === 1) ? 'User' : 'Admin'%> <%= quyen %></td>
+            <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary"><a href="/detail_user/<%= element.username %>">Detail</a></button>
+                <button type="button" class="btn btn-secondary"><a href="/view_edit/<%= element.username %>">Edit</a></button>
+                <!-- <button type="submit" class="btn btn-secondary"><form action="/del_user" method="post"><input type="hidden" name="username" value="<%= element.username %>"></form>Del</button> -->
+                <form action="/del_user" method="post"><input type="hidden" name="username" value="<%= element.username %>"><button type="submit" class="btn btn-secondary">Del</button></form>
+              </div>
+            </td>
+          </tr>
+          <% id += 1 %>
+          <% }) %>
+        </tbody>
+      </table>

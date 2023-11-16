@@ -1,0 +1,50 @@
+	<style>
+          .limited-size {
+    width: 580px; /* Giới hạn chiều rộng của thẻ <p> */
+    max-height: 100%; /* Giới hạn chiều cao của thẻ <p> để tự động điều chỉnh */
+    overflow: hidden; /* Ẩn nội dung vượt quá phạm vi hiển thị */
+    text-overflow: ellipsis; /* Thêm dấu "..." để chỉ ra rằng nội dung bị cắt giảm */
+  }
+    </style>
+    
+    <!--__--__--__--__--  M A I N   C O N T E N T  --__--__--__--___--__--__-->
+    <section>
+        <article id="singlepost">
+            <h1 class="limited-size" ><a style="color: white;"  href="singlepost.html"><%= data.item[0].title %></a></h1>
+            <h5 style="color: white;"><%= data.item[0].create_at %></h5>
+            <img height="300px" width="580px" src="/static/upload/<%= data.item[0].image %>" alt="" />
+            <p class="limited-size" style="color: white;"><%= data.item[0].content %></p>
+            </article>
+
+        <!--__--__--__--  S I D E B A R --__--__--__--__-->
+        <div id="sidebar">
+            <!-- <aside>
+                <h1>Recent Posts</h1>
+                <ul>
+                    <li><a href="#">Suspendisse Enim Elit Tempor Acer</a></li>
+                    <li><a href="#">Mauris Sed Lectus Duieleifend Quis Sem</a></li>
+                    <li><a href="#">Suspendisse Enim Elit Tempor Acer Fermentum Vulputate</a></li>
+                    <li><a href="#">Mauris Sed Lectus Duieleifend Quis Sem</a></li>						
+                </ul>
+            </aside> -->
+
+               
+            <aside>
+                <div id="cat">
+                    <h1 style="color: white;">Categories</h1>
+                    <ul>
+                        <% let id = 1 %>
+                        <% data.items.forEach(element => { %>
+                            <li><a href="/ByNews/<%= element.id %>"><%= element.title %></a></li>
+        
+                        <% id += 1 %>
+                        <% }) %>
+                       
+                     
+                    </ul>
+                </div>
+               
+            </aside>
+        </div>
+    </section>
+    <!--__--__--__--__--  T H E    F O O T E R --__--__--__--___--__--__--__-->
