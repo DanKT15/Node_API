@@ -28,6 +28,31 @@ const apiNewId = async (req, res) => {
 
 }
 
+const apiPostList = async (req, res) => {
+    
+    var limit = 4
+    const users = await postModel.list_hot_post_user(limit);
+
+    res.status(200).json({
+      data: users
+    })
+
+}
+
+
+const apiPostId = async (req, res) => {
+    const  postId = req.params.id;
+    
+    const GetById = await postModel.detail_post_edit(postId);
+
+    res.status(200).json({
+        data: GetById
+      })
+
+}
+
+
+
 //hien thi bai viet theo loai tin tuc
 const apiPostFromNew = async (req, res) => {
     const  newId = req.params.id;
@@ -188,4 +213,4 @@ const del_news = async (req, res) => {
 }
 
 
-export default {apiPostFromNew,apiNewId,apiReactList,list_news,GetById,insert_news,edit_news,del_news}
+export default {apiPostList,apiPostId,apiPostFromNew,apiNewId,apiReactList,list_news,GetById,insert_news,edit_news,del_news}

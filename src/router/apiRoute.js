@@ -53,6 +53,14 @@ const initAPIRoute = (app) => {
     api.put('/edit_news/:id', ApiNewsController.edit_news)
     api.delete('/del_news/:id', ApiNewsController.del_news)
 
+
+    //user api
+    api.get('/news', ApiNewsController.apiReactList)
+    api.get('/news/:id', ApiNewsController.apiPostFromNew)
+
+    api.get('/posts', ApiNewsController.apiPostList)
+    api.get('/post/:id', ApiNewsController.apiPostId)
+
     return app.use('/api/v1', api)
 }
 export default initAPIRoute
