@@ -20,7 +20,7 @@ const list_new_post_user = async () => {
 }
 
 const list_post = async (from, to) => {
-    const [rows, fields] = await con.execute('SELECT * FROM `posts` LIMIT ?, ?', [from, to])
+    const [rows, fields] = await con.execute('SELECT * FROM `posts`')
     return rows
 }
 
