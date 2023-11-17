@@ -39,11 +39,11 @@ const initAPIRoute = (app) => {
     //api quan ly bai viet ( post )  
     api.get('/list-post/:from-:to', ApiPostController.list_post)
     api.get('/create_new_post', ApiPostController.new_post)
-    api.post('/insert_new_post', upload.single('filenew'), ApiPostController.insert_post)
+    api.post('/insert_new_post', upload.single('file'), ApiPostController.insert_post)
     api.get('/detail_post/:id', ApiPostController.detail_post)
     api.get('/view_edit_post/:id', ApiPostController.view_edit_post)
-    api.put('/edit_post', upload.single('filenew'), ApiPostController.edit_post)
-    api.delete('/del_post', ApiPostController.del_post)
+    api.put('/edit_post', upload.single('file'), ApiPostController.edit_post)
+    api.delete('/del_post/:id', ApiPostController.del_post)
 
 
     //api quan ly tin tuc (news)
