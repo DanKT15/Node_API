@@ -11,7 +11,7 @@ const GetById = async (id) => {
 }
 
 const list_news = async (from, to) => {
-    const [rows, fields] = await con.execute('SELECT * FROM `news` LIMIT ?, ?', [from, to])
+    const [rows, fields] = await con.execute('SELECT * FROM `news` LIMIT')
     return rows
 } 
 
