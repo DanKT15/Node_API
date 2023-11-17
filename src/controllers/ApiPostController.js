@@ -37,7 +37,7 @@ const insert_post = async (req, res) => {
         let img = req.file
 
 
-        if (!body.titlenew || !body.contentnew || !img.filename || !body.news_id) {
+        if (!img.filename || !body.title || !body.content || !body.news_id) {
             return res.status(200).json(
                 {
                     err: 1,
@@ -48,7 +48,14 @@ const insert_post = async (req, res) => {
 
         const currentDate = new Date();
 
-        await postModel.insert_post(body.titlenew, body.contentnew, img.filename, body.news_id, currentDate)
+        await postModel.insert_post(body.title, body.content, img.filename, body.news_id, currentDate)
+
+        return res.status(200).json(
+            {
+                err: 0,
+                mess: "Tạo post thành công"
+            }
+        )
 
     } catch (error) {
         return res.status(200).json(
@@ -78,6 +85,7 @@ const list_post = async (req, res) => {
     
             return res.status(200).json(
                 {
+                    err: 0,
                     page: 'listpost', 
                     title: 'Danh sách bài viết', 
                     params: {
@@ -140,10 +148,11 @@ const edit_post = async (req, res) => {
 
     try {
 
-        const id = req.body.id 
+        
         let body = req.body
         let img = body.img_old // truyền img cũ qua hidden input
         let file = req.file
+        let id = body.id 
 
         if (file) {
 
@@ -162,7 +171,7 @@ const edit_post = async (req, res) => {
             fs.unlinkSync('./src/public/upload/' + post[0].image)
         }
 
-        if (!body.titlenew || !body.contentnew || !body.news_id) {
+        if (!body.title || !body.content || !body.news_id) {
             return res.status(200).json(
                 {
                     err: 1,
@@ -171,7 +180,7 @@ const edit_post = async (req, res) => {
             )
         }
 
-        await postModel.edit_post(body.titlenew, body.contentnew, img, body.news_id, id)
+        await postModel.edit_post(body.title, body.content, img, body.news_id, id)
 
         return res.status(200).json(
             {
@@ -244,21 +253,22 @@ const del_post = async (req, res) => {
         }
 
         fs.unlinkSync('./src/public/upload/' + post[0].image)
+
         let list = await postModel.del_post(id)
 
         return res.status(200).json(
-            JWT.createJWT({data: {
+            {
                 err: 0,
-                mess: "Xóa bài viết thành công"}}
-            )
+                mess: "Xóa bài viết thành công"
+            }
         )
 
     } catch (error) {
         return res.status(200).json(
-            JWT.createJWT({data: {
+            {
                 err: 1,
-                mess: "Lỗi: " + error}}
-            )
+                mess: "Lỗi: " + error
+            }
         )
     }
 }
