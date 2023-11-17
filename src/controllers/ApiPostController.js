@@ -231,7 +231,7 @@ const del_post = async (req, res) => {
 
     try {
 
-        const id = req.body.id 
+        const id = req.params.id 
         let post = await postModel.detail_post(id)
 
         if (post.length < 1) {
