@@ -64,19 +64,24 @@ const apiPostFromNew = async (req, res) => {
 
 }
 
-
+//end USER REACT
 
 
 
 const list_news = async (req, res) => {
-
+    let auth = null
+    if (req.session.auth) {
+        auth = req.session.auth.name
+    } 
     try {
             let items = await newsModel.list_news_all()
     
             return res.status(200).json(
                 {
+                    err: 0,
                     items: items,
-                    mess: "Danh sách tin tức"
+                    mess: "Danh sách tin tức",
+                    auth: auth
                 }
             )
         
@@ -120,17 +125,18 @@ const insert_news = async (req, res) => {
 
         let body = req.body
 
-        let items =  await newsModel.insert_news(body.title)
+        await newsModel.insert_news(body.title)
        
-        return res.status(400).json(
+        return res.status(200).json(
             {
-                items: items,
+                err: 0,
+               
                 mess: "Insert thành công "
             }
         )
 
     } catch (error) {
-        return res.status(400).json(
+        return res.status(200).json(
             {
                 err: 1,
                 mess: "Lỗi: " + error
