@@ -64,7 +64,21 @@ const apiPostFromNew = async (req, res) => {
 
 }
 
+//bai viet moi
+const apiNewPosts = async (req, res) => {
+    const  limit  = 3;
+    const GetNewPosts = await postModel.list_hot_post_user(limit);
+
+    res.status(200).json({
+      data: GetNewPosts
+    })
+
+}
+
+
 //end USER REACT
+
+
 
 
 
@@ -78,6 +92,7 @@ const list_news = async (req, res) => {
     
             return res.status(200).json(
                 {
+                    //key:value
                     err: 0,
                     items: items,
                     mess: "Danh sách tin tức",
@@ -149,14 +164,14 @@ const edit_news = async (req, res) => {
 
     try {
 
-        let id = req.params.id
+       
         let body = req.body
-
+        let id = body.id 
       
             let news = await newsModel.GetById(id)
 
             if (news.length < 1) {
-                return res.status(400).json(
+                return res.status(200).json(
                     {
                         err: 1,
                         mess: "Bài viết không tồn tại"
@@ -167,7 +182,7 @@ const edit_news = async (req, res) => {
       
 
         if (!body.title) {
-            return res.status(400).json(
+            return res.status(200).json(
                 {
                     err: 1,
                     mess: "Thiếu thông tin cần thiết"
@@ -185,7 +200,7 @@ const edit_news = async (req, res) => {
         )
 
     } catch (error) {
-        return res.status(400).json(
+        return res.status(200).json(
             {
                 err: 1,
                 mess: "Lỗi: " + error
@@ -219,4 +234,4 @@ const del_news = async (req, res) => {
 }
 
 
-export default {apiPostList,apiPostId,apiPostFromNew,apiNewId,apiReactList,list_news,GetById,insert_news,edit_news,del_news}
+export default {apiNewPosts,apiPostList,apiPostId,apiPostFromNew,apiNewId,apiReactList,list_news,GetById,insert_news,edit_news,del_news}

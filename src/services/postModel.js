@@ -34,7 +34,7 @@ const detail_post = async (id) => {
 
 const detail_post_edit = async (id) => {
     const [rows, fields] = await con.execute('SELECT * FROM posts WHERE posts.id = ?', [id])
-    return rows
+    return rows[0]
 }
 const edit_post = async (title, content, image, news_id, id) => {
     await con.execute('UPDATE `posts` SET `title`=?,`content`=?,`image`=?,`news_id`=? where posts.id = ?  ',[title, content, image, news_id, id])

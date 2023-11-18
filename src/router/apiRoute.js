@@ -1,7 +1,6 @@
 import express from "express"
 import multer from 'multer' // thu vien up img
 import path from "path"
-
 import ApiLoginController from "./../controllers/ApiLoginController"
 import ApiUserController from "./../controllers/ApiUserController"
 import ApiPostController from "./../controllers/ApiPostController"
@@ -15,6 +14,7 @@ const storage = multer.diskStorage({
       cb(null, uniqueSuffix + path.extname(file.originalname))
     }
   })
+
   
 const upload = multer({ storage: storage })
 
@@ -47,10 +47,12 @@ const initAPIRoute = (app) => {
 
 
     //api quan ly tin tuc (news)
+    
     api.get('/GetById/:id', ApiNewsController.GetById)
     api.get('/list-news', ApiNewsController.list_news)
     api.post('/insert_news', ApiNewsController.insert_news)
     api.put('/edit_news/:id', ApiNewsController.edit_news)
+    api.put('/edit_new', ApiNewsController.edit_news)
     api.delete('/del_news/:id', ApiNewsController.del_news)
 
 
@@ -60,6 +62,12 @@ const initAPIRoute = (app) => {
 
     api.get('/posts', ApiNewsController.apiPostList)
     api.get('/post/:id', ApiNewsController.apiPostId)
+
+    //lay ra 3 bai viet moi nhat
+    api.get('/new_posts', ApiNewsController.apiNewPosts)
+
+  
+
 
     return app.use('/api/v1', api)
 }
