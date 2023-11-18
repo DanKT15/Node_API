@@ -35,7 +35,7 @@ const verifyAuth = (req, res, next) => {
             }
         } 
         else {
-            return res.status(200).json({ err: 1, mess: "khong co quyen han truy cap" })
+            return res.status(200).json({ err: 999, mess: "khong co quyen han truy cap" })
         }
     }
     else {
