@@ -30,8 +30,8 @@ const apiNewId = async (req, res) => {
 
 const apiPostList = async (req, res) => {
     
-    var limit = 4
-    const users = await postModel.list_hot_post_user(limit);
+    // var limit = 4
+    const users = await postModel.list_new_post_user();
 
     res.status(200).json({
       data: users
@@ -232,6 +232,10 @@ const del_news = async (req, res) => {
         )
     }
 }
+
+//demo
+
+
 
 
 export default {apiNewPosts,apiPostList,apiPostId,apiPostFromNew,apiNewId,apiReactList,list_news,GetById,insert_news,edit_news,del_news}

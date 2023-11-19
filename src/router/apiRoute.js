@@ -66,7 +66,8 @@ const initAPIRoute = (app) => {
     //lay ra 3 bai viet moi nhat
     api.get('/new_posts', ApiNewsController.apiNewPosts)
 
-  
+    //lay ra hinh anh
+    // api.get('/',ApiNewsController.apiPostList)
 
 
     return app.use('/api/v1', api)
