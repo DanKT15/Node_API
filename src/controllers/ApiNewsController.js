@@ -116,11 +116,21 @@ const GetById = async (req, res) => {
 
             let id = req.params.id
             let items = await newsModel.GetById(id)
+
+            if (items.length > 0) {
+                return res.status(200).json(
+                    {
+                        err: 0,
+                        items: items,
+                        mess: "chi tiết tin tức"
+                    }
+                )
+            }
     
             return res.status(200).json(
                 {
-                    items: items,
-                    mess: "chi tiết tin tức"
+                    err: 1,
+                    mess: "Không tồn tại tin tức"
                 }
             )
         
